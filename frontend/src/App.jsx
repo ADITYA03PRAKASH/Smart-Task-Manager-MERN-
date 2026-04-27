@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { TaskProvider } from "./context/TaskContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Login from './pages/Login';
 import Signup from "./pages/Signup";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
           <Routes>
 
             {/* Default route → redirect to signup */}
+            <Route path="/login"    element={<Login />} />
             <Route path="/" element={<Navigate to="/signup" />} />
 
             {/* Signup route */}
