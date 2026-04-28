@@ -4,6 +4,10 @@ require('express-async-errors'); // Patches Express to auto-forward async reject
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./src/config/db');
+const authRoutes = require('./src/routes/authRoutes');
+const taskRoutes = require('./src/routes/taskRoutes');
+const userRoutes = require('./src/routes/userRoutes');
+const { notFound, errorHandler } = require('./src/middlewares/errorMiddleware');
 
 // Connect to MongoDB
 connectDB();
@@ -26,7 +30,9 @@ app.get('/health', (req, res) =>
 );
 
 // ── API Routes ────────────────────────────────────────────────────────────────
-
+app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
+app.use('/api/users', userRoutes);
 
 // ── Error handling (must be last) ─────────────────────────────────────────────
 app.use(notFound);
